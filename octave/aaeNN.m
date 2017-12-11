@@ -39,7 +39,7 @@ fprintf('\nTraining Neural Network... \n')
 
 options = optimset('MaxIter', 250);
 
-lambda = 0.5;
+lambda = 0.7;
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
