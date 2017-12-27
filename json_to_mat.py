@@ -2,6 +2,7 @@
 import json
 import os
 from mat4py import savemat
+import numpy as np
 
 with open('aae-form-root-canal-ml-export.json') as json_data:
     d = json.load(json_data)
@@ -20,13 +21,14 @@ for key in d['forms']:
         o['X_data'][i].append(0)
         tmp = d['formResponses'][d['forms'][key]['responses'][j]]
         if d['formResponses'][d['forms'][key]['responses'][j]]['section'] == 'A':
-            o['X_data'][i][k] = 1
+            o['X_data'][i][k] = 1.0
         else:
             o['X_data'][i][k] += sum(tmp['min']) * 1.0
             o['X_data'][i][k] += sum(tmp['mod']) * 2.0
             o['X_data'][i][k] += sum(tmp['high']) * 5.0
         k += 1
-    o['y_data'].append([2.0] if d['forms'][key]['referredToSpl'] else [1.0])
+    o['y_data'].append([1.0] if d['forms'][key]['referredToSpl'] else [0.0])
     i += 1
 mkdir_if_not_exists('octave')
 savemat('octave/aae-data.mat', o)
+np.save('aae-data', o)
