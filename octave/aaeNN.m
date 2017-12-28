@@ -19,11 +19,11 @@ endfor
 rand_indices = indices'(randperm(size(indices,2)),:);
 for i=1:n_train
   X(i,:) = X_data(rand_indices(i),:);
-  y(i,:) = y_data(rand_indices(i),:);
+  y(i,:) = y_data(rand_indices(i),:) + 1;
 endfor
 for i=1:s-n_train
   X_test(i,:) = X_data(rand_indices(i+n_train),:);
-  y_test(i,:) = y_data(rand_indices(i+n_train),:);
+  y_test(i,:) = y_data(rand_indices(i+n_train),:) + 1;
 endfor
 %% ================ Initializing Pameters ================
 fprintf('\nInitializing Neural Network Parameters ...\n')
@@ -39,7 +39,7 @@ fprintf('\nTraining Neural Network... \n')
 
 options = optimset('MaxIter', 250);
 
-lambda = 0.7;
+lambda = 0.5;
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
