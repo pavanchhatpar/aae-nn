@@ -18,16 +18,19 @@ for key in d['forms']:
     o['X_data'].append([])
     k = 0
     for j in range(len(d['forms'][key]['responses'])):
-        o['X_data'][i].append(0)
+        # o['X_data'][i].append(0)
         tmp = d['formResponses'][d['forms'][key]['responses'][j]]
         if d['formResponses'][d['forms'][key]['responses'][j]]['section'] == 'A':
-            o['X_data'][i][k] = 1.0
+            o['X_data'][i].extend([1,0,0])
         else:
-            o['X_data'][i][k] += sum(tmp['min']) * 1.0
-            o['X_data'][i][k] += sum(tmp['mod']) * 2.0
-            o['X_data'][i][k] += sum(tmp['high']) * 5.0
+            o['X_data'][i].extend(tmp['min'])
+            o['X_data'][i].extend(tmp['mod'])
+            o['X_data'][i].extend(tmp['high'])
+            # o['X_data'][i][k] += sum(tmp['min']) * 1.0
+            # o['X_data'][i][k] += sum(tmp['mod']) * 2.0
+            # o['X_data'][i][k] += sum(tmp['high']) * 5.0
         k += 1
-    o['y_data'].append([1.0] if d['forms'][key]['referredToSpl'] else [0.0])
+    o['y_data'].append([1] if d['forms'][key]['referredToSpl'] else [0])
     i += 1
 mkdir_if_not_exists('octave')
 savemat('octave/aae-data.mat', o)
