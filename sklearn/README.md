@@ -10,11 +10,7 @@ Treating each response checkbox as one input feature
 
 ### Training
 ```
-(virt-env)$ python train.py
-```
+(virt-env)$ python svm-raw.py
 
-### Predict with Python
-Change model path accordingly in `predict.py`
-```
-(virt-env)$ python predict.py
+(virt-env)$ python svm-raw.py
 ```

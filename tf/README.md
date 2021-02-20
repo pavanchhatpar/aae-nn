@@ -15,7 +15,9 @@ Treating each question as one input giving 17 input features
 
 ### Training
 ```
-(virt-env)$ python train.py
+(virt-env)$ python dnn-raw.py
+
+(virt-env)$ python dnn-summarized.py
 ```
 
 ### Predict with Python
